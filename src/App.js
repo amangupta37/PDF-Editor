@@ -1,9 +1,10 @@
 import React from "react";
 import "./App.css";
+import { Editor } from "./components";
 const App = () => {
     return (
         <div className="App">
-            <h1>Editor</h1>
+            <Editor />
         </div>
     );
 };
