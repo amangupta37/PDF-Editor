@@ -7,7 +7,7 @@ const Editor = () => {
             <div className="Left">
                 <h1>Elements</h1>
                 <div className="Content">
-                    <Draggable>
+                    <Draggable bounds="parent">
                         <div className="element one"></div>
                     </Draggable>
                 </div>
