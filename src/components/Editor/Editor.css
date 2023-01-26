@@ -51,6 +51,8 @@
     padding: 3rem;
     column-gap: 3rem;
     row-gap: 3rem;
+    /* background-color: red; */
+    position: relative;
 }
 .Content :hover {
     cursor: pointer;
