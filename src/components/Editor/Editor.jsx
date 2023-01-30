@@ -22,7 +22,10 @@ const Elements = [
         id: 2,
         icon: "",
         type: "",
-        element: <h2>Class</h2>,
+        style: {
+            color: "red",
+        },
+        element: <h2 style={{ color: "red" }}>Class</h2>,
     },
     {
         id: 3,
@@ -76,8 +79,24 @@ const Editor = () => {
     const [data, setData] = useState([]);
     const handleClick = (element) => {
         console.log("=============>", element);
-        Elements.pop(element);
+        // Elements.pop(element.id);
         setData([...data, element]);
+    };
+
+    const handleMouse = (ele) => {
+        const obj = {
+            color: "blue",
+            fontSize: "200px",
+        };
+
+        data[0].style = obj;
+
+        console.log(ele.element.props.style);
+        console.log("clicked", ele.element);
+    };
+
+    const handleMouseUp = (e) => {
+        console.log("up");
     };
     return (
         <div className="Editor">
@@ -115,13 +134,20 @@ const Editor = () => {
                     })}
                 </div>
             </div>
+            <h1>
+                Hello world
+                <button>style text red</button>
+            </h1>
+
             <div className="Right">
                 <div className="RightContent">
-                    {/* <h1>Dragable area</h1> */}
-
                     {data?.map((element, index) => {
                         return (
-                            <Draggable bounds="parent">
+                            <Draggable
+                                bounds="parent"
+                                key={index}
+                                style={{ color: "green" }}
+                            >
                                 {element?.element}
                             </Draggable>
                         );
