@@ -87,6 +87,6 @@
     cursor: pointer;
     position: absolute;
 }
-.RightContent :hover {
-    border: 2px solid blue;
-}
+/* .RightContent :hover {
+    border: 2px solid blue; 
+} */
