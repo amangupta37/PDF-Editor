@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import "./Editor.css";
 import Draggable from "react-draggable";
 import Pdf from "react-to-pdf";
+import { Resizable } from "re-resizable";
+import { Rnd } from "react-rnd";
 const ref = React.createRef();
 
 const Elements = [
     {
         id: 1,
         icon: "",
-        type: "",
+        type: "img",
         element: (
             <img
-                width={"100px"}
+                width={"100%"}
+                height="100%"
                 src="https://xsgames.co/randomusers/assets/avatars/male/2.jpg"
                 alt=""
                 draggable="false"
@@ -21,7 +24,7 @@ const Elements = [
     {
         id: 2,
         icon: "",
-        type: "",
+        type: "text",
         style: {
             color: "red",
         },
@@ -30,47 +33,48 @@ const Elements = [
     {
         id: 3,
         icon: "",
-        type: "",
+        type: "text",
         element: <h2>School name</h2>,
     },
     {
         id: 4,
         icon: "",
-        type: "",
+        type: "text",
         element: <h2>Section</h2>,
     },
     {
         id: 5,
         icon: "",
-        type: "",
+        type: "text",
         element: <h2>Certificate Header</h2>,
     },
     {
         id: 6,
+        type: "text",
         element: <h2>Date of Birth</h2>,
     },
     {
         id: 7,
         icon: "",
-        type: "",
+        type: "text",
         element: <h2>Certificate Design</h2>,
     },
     {
         id: 8,
         icon: "",
-        type: "",
+        type: "text",
         element: <h2>Address</h2>,
     },
     {
         id: 9,
         icon: "",
-        type: "",
+        type: "text",
         element: <h2>Student Name</h2>,
     },
     {
         id: 10,
         icon: "",
-        type: "",
+        type: "text",
         element: <h2>Father Name</h2>,
     },
 ];
@@ -82,6 +86,12 @@ const Editor = () => {
         // Elements.pop(element.id);
         setData([...data, element]);
     };
+    // const defaultRndStyle = {
+    //     x:0,
+    //     y:0,
+    //     width:
+
+    // }
 
     const handleMouse = (ele) => {
         const obj = {
@@ -138,18 +148,31 @@ const Editor = () => {
                 Hello world
                 <button>style text red</button>
             </h1>
+            {/* { x: 0, y: 0, width: "auto" } */}
 
             <div className="Right">
                 <div className="RightContent">
-                    {data?.map((element, index) => {
+                    {data.map((element, index) => {
                         return (
-                            <Draggable
+                            <Rnd
+                                default={{
+                                    x: 0,
+                                    y: 0,
+                                    width:
+                                        element.type === "img" ? 250 : "auto",
+                                    height:
+                                        element.type === "img" ? 200 : "auto",
+                                }}
+                                minHeight={element.type === "img" ? "200px" : 0}
+                                minWidth={element.type === "img" ? "200px" : 0}
                                 bounds="parent"
                                 key={index}
-                                style={{ color: "green" }}
+                                enableResizing={
+                                    element.type === "img" ? true : false
+                                }
                             >
                                 {element?.element}
-                            </Draggable>
+                            </Rnd>
                         );
                     })}
                 </div>
