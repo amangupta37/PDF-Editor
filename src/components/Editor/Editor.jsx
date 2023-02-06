@@ -80,6 +80,7 @@ const Elements = [
 ];
 
 const Editor = () => {
+    const [activeElement, setActiveElement] = useState(false);
     const [data, setData] = useState([]);
     const handleClick = (element) => {
         console.log("=============>", element);
@@ -108,6 +109,23 @@ const Editor = () => {
     const handleMouseUp = (e) => {
         console.log("up");
     };
+    const handleDragStart = () => {
+        setActiveElement(true);
+    };
+    const handleDragStop = () => {
+        setActiveElement(false);
+    };
+    const handleResizeStart = () => {
+        setActiveElement(true);
+    };
+    const handleResizeStop = () => {
+        setActiveElement(false);
+    };
+
+    const activestyle = {
+        border: "1px solid blue",
+    };
+
     return (
         <div className="Editor">
             <Pdf targetRef={ref} filename="code-example.pdf">
@@ -159,7 +177,7 @@ const Editor = () => {
                                     x: 0,
                                     y: 0,
                                     width:
-                                        element.type === "img" ? 250 : "auto",
+                                        element.type === "img" ? 200 : "auto",
                                     height:
                                         element.type === "img" ? 200 : "auto",
                                 }}
@@ -169,6 +187,13 @@ const Editor = () => {
                                 key={index}
                                 enableResizing={
                                     element.type === "img" ? true : false
+                                }
+                                onDragStart={handleDragStart}
+                                onDragStop={handleDragStop}
+                                onResizeStart={handleResizeStart}
+                                onResizeStop={handleResizeStop}
+                                style={
+                                    activeElement === true ? activestyle : {}
                                 }
                             >
                                 {element?.element}
